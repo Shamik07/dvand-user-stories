@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DVAND User Stories Documentation</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎬</text></svg>">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mermaid/10.6.1/mermaid.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/9.1.2/marked.min.js"></script>
+    <style>
+        /* CSS Custom Properties for Light Theme */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-gradient: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --success-gradient: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            
+            --sidebar-bg: #ffffff;
+            --sidebar-header: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --sidebar-text: #2c3e50;
+            --sidebar-text-muted: #6c757d;
+            --sidebar-header-text: #ffffff;
+            
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8fafc;
+            --bg-tertiary: #f1f5f9;
+            --bg-card: #ffffff;
+            
+            --text-primary: #1e293b;
+            --text-secondary: #475569;
+            --text-muted: #64748b;
+            --text-accent: #667eea;
+            
+            --border-color: #e2e8f0;
+            --border-secondary: #cbd5e1;
+            --border-accent: #667eea;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            
+            --error-bg: #fef2f2;
+            --error-text: #dc2626;
+            --error-border: #fecaca;
+            
+            --success-bg: #f0fdf4;
+            --success-text: #16a34a;
+            --success-border: #bbf7d0;
+            
+            --warning-bg: #fffbeb;
+            --warning-text: #d97706;
+            --warning-border: #fed7aa;
+            
+            --info-bg: #eff6ff;
+            --info-text: #2563eb;
+            --info-border: #bfdbfe;
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --primary-gradient: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            --secondary-gradient: linear-gradient(135deg, #ec4899 0%, #f43f5e 100%);
+            --accent-gradient: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+            --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            
+            --sidebar-bg: #0f172a;
+            --sidebar-header: linear-gradient(135deg, #8b5cf6 0%, #a855f7 100%);
+            --sidebar-text: #f1f5f9;
+            --sidebar-text-muted: #94a3b8;
+            --sidebar-header-text: #ffffff;
+            
+            --bg-primary: #020617;
+            --bg-secondary: #0f172a;
+            --bg-tertiary: #1e293b;
+            --bg-card: #1e293b;
+            
+            --text-primary: #f1f5f9;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+            --text-accent: #a78bfa;
+            
+            --border-color: #334155;
+            --border-secondary: #475569;
+            --border-accent: #8b5cf6;
+            
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.3);
+            --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            
+            --error-bg: #7f1d1d;
+            --error-text: #fca5a5;
+            --error-border: #dc2626;
+            
+            --success-bg: #14532d;
+            --success-text: #86efac;
+            --success-border: #16a34a;
+            
+            --warning-bg: #78350f;
+            --warning-text: #fbbf24;
+            --warning-border: #d97706;
+            
+            --info-bg: #1e3a8a;
+            --info-text: #93c5fd;
+            --info-border: #2563eb;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            height: 100vh;
+            display: flex;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            line-height: 1.6;
+        }
+        
+        .sidebar {
+            width: 380px;
+            background: var(--sidebar-bg);
+            color: var(--sidebar-text);
+            overflow-y: auto;
+            border-right: 1px solid var(--border-secondary);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+        
+        .sidebar-header {
+            padding: 2rem 1.5rem;
+            background: var(--sidebar-header);
+            color: var(--sidebar-header-text);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sidebar-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="white" opacity="0.1"/><circle cx="80" cy="40" r="0.5" fill="white" opacity="0.1"/><circle cx="40" cy="80" r="1.5" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+        
+        .brand {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .brand h1 {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(90deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .brand .subtitle {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            font-weight: 500;
+        }
+        
+        .file-tree {
+            padding: 1rem 0;
+        }
+        
+        .user-type-section {
+            margin-bottom: 1.5rem;
+        }
+        
+        .stories-list {
+            padding: 1rem 0;
+        }
+        
+        .story-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem 1.5rem;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--sidebar-text);
+            border-radius: 8px;
+            margin: 0.5rem 1rem;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+        }
+        
+        .story-item:hover {
+            background: var(--bg-secondary);
+            border-color: var(--border-accent);
+        }
+        
+        .story-item.active {
+            background: var(--primary-gradient);
+            color: white;
+            font-weight: 600;
+            border-color: transparent;
+        }
+        
+        .story-item.loading {
+            background: var(--warning-bg);
+            color: var(--warning-text);
+            border: 1px solid var(--warning-border);
+        }
+        
+        .story-icon {
+            margin-right: 0.75rem;
+            font-size: 1.125rem;
+        }
+        
+        .story-name {
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            background: var(--bg-primary);
+            transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .content-header {
+            padding: 2rem 2.5rem;
+            background: var(--bg-card);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .header-info {
+            flex: 1;
+        }
+        
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .theme-toggle {
+            background: var(--bg-secondary);
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            padding: 0.75rem;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+        }
+        
+        .theme-toggle:hover {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+        }
+        
+        .content-title {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .content-path {
+            color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+        
+        .content-container {
+            flex: 1;
+            overflow: auto;
+            background: var(--bg-secondary);
+            position: relative;
+        }
+        
+        .content-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2.5rem;
+        }
+        
+        .welcome-message {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 4rem 2rem;
+            background: var(--bg-card);
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            margin: 2rem 0;
+        }
+        
+        .welcome-message h2 {
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .welcome-message p {
+            font-size: 1.125rem;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 16px;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--primary-gradient);
+        }
+        
+        .feature-card h3 {
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+        
+        .feature-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+        
+        .markdown-content {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-color);
+            line-height: 1.7;
+        }
+        
+        .markdown-content h1,
+        .markdown-content h2,
+        .markdown-content h3,
+        .markdown-content h4,
+        .markdown-content h5,
+        .markdown-content h6 {
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+        
+        .markdown-content h1 {
+            font-size: 2.5rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 1rem;
+        }
+        
+        .markdown-content h2 {
+            font-size: 2rem;
+            color: var(--text-accent);
+        }
+        
+        .markdown-content h3 {
+            font-size: 1.5rem;
+        }
+        
+        .markdown-content p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .markdown-content ul,
+        .markdown-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+        
+        .markdown-content li {
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+        
+        .markdown-content strong {
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .markdown-content code {
+            background: var(--bg-secondary);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.875rem;
+            color: var(--text-accent);
+            border: 1px solid var(--border-color);
+        }
+        
+        .markdown-content pre {
+            background: var(--bg-secondary);
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        .markdown-content pre code {
+            background: none;
+            padding: 0;
+            border: none;
+            color: var(--text-primary);
+        }
+        
+        .markdown-content blockquote {
+            border-left: 4px solid var(--border-accent);
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        
+        .mermaid {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            margin: 2rem 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .error-message,
+        .loading-message,
+        .info-message {
+            padding: 2rem;
+            border-radius: 12px;
+            margin: 2rem 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid;
+        }
+        
+        .error-message {
+            background: var(--error-bg);
+            color: var(--error-text);
+            border-color: var(--error-border);
+        }
+        
+        .loading-message {
+            background: var(--info-bg);
+            color: var(--info-text);
+            border-color: var(--info-border);
+            text-align: center;
+        }
+        
+        .info-message {
+            background: var(--success-bg);
+            color: var(--success-text);
+            border-color: var(--success-border);
+        }
+        
+        .loading-spinner {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            border: 3px solid var(--border-color);
+            border-top: 3px solid var(--text-accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 0.75rem;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 320px;
+            }
+            
+            .content-wrapper {
+                padding: 2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                max-height: 40vh;
+                order: 2;
+            }
+            
+            .main-content {
+                order: 1;
+                flex: 1;
+            }
+            
+            .content-header {
+                padding: 1.5rem;
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+            
+            .header-controls {
+                align-self: stretch;
+                justify-content: space-between;
+            }
+            
+            .content-wrapper {
+                padding: 1.5rem;
+            }
+            
+            .markdown-content {
+                padding: 1.5rem;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+        }
+        
+        /* Dark mode specific styles for mermaid diagrams */
+        [data-theme="dark"] .mermaid svg {
+            background: var(--bg-card) !important;
+        }
+        
+        [data-theme="dark"] .mermaid .node rect,
+        [data-theme="dark"] .mermaid .node circle,
+        [data-theme="dark"] .mermaid .node ellipse,
+        [data-theme="dark"] .mermaid .node polygon {
+            fill: var(--bg-tertiary) !important;
+            stroke: #8b5cf6 !important;
+            stroke-width: 2px !important;
+        }
+        
+        [data-theme="dark"] .mermaid .node .label,
+        [data-theme="dark"] .mermaid .nodeLabel,
+        [data-theme="dark"] .mermaid text {
+            fill: var(--text-primary) !important;
+            color: var(--text-primary) !important;
+        }
+        
+        [data-theme="dark"] .mermaid .edgePath path,
+        [data-theme="dark"] .mermaid .flowchart-link {
+            stroke: #8b5cf6 !important;
+            stroke-width: 2px !important;
+        }
+        
+        [data-theme="dark"] .mermaid .arrowheadPath {
+            fill: #8b5cf6 !important;
+            stroke: #8b5cf6 !important;
+        }
+    </style>
+</head>
+<body data-theme="light">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <div class="brand">
+                <h1>🎬 DVAND</h1>
+                <div class="subtitle">User Stories Documentation</div>
+            </div>
+        </div>
+        <div class="stories-list">
+            <div class="story-item" data-file="dvand_admin_user_stories.md">
+                <span class="story-icon">🛠️</span>
+                <span class="story-name">Admin User Stories</span>
+            </div>
+            
+            <div class="story-item" data-file="dvand_content_creator_user_stories.md">
+                <span class="story-icon">🎥</span>
+                <span class="story-name">Content Creator User Stories</span>
+            </div>
+            
+            <div class="story-item" data-file="dvand_logged_in_user_stories.md">
+                <span class="story-icon">👤</span>
+                <span class="story-name">Logged-in User Stories</span>
+            </div>
+            
+            <div class="story-item" data-file="dvand_non_logged_in_user_stories.md">
+                <span class="story-icon">🌐</span>
+                <span class="story-name">Non-Logged User Stories</span>
+            </div>
+            
+            <div class="story-item" data-file="dvand_overall_user_stories.md">
+                <span class="story-icon">📋</span>
+                <span class="story-name">Overall User Stories</span>
+            </div>
+            
+            <div class="story-item" data-file="dvand_standardized_specs.md">
+                <span class="story-icon">📐</span>
+                <span class="story-name">Standardized Specifications</span>
+            </div>
+            
+            <div class="story-item" data-file="dvand_error_handling_stories.md">
+                <span class="story-icon">⚠️</span>
+                <span class="story-name">Error Handling Stories</span>
+            </div>
+        </div>
+    </div>
+    
+    <div class="main-content">
+        <div class="content-header">
+            <div class="header-info">
+                <div class="content-title" id="content-title">DVAND Platform Documentation</div>
+                <div class="content-path" id="content-path">Select a user story to view detailed documentation</div>
+            </div>
+            <div class="header-controls">
+                <button class="theme-toggle" id="theme-toggle" title="Toggle Dark Mode">
+                    🌙
+                </button>
+            </div>
+        </div>
+        <div class="content-container" id="content-container">
+            <div class="content-wrapper">
+                <div class="welcome-message fade-in">
+                    <h2>🎯 Welcome to DVAND User Stories</h2>
+                    <p>Comprehensive documentation for the short-form video competition platform</p>
+                    <p>Click on any user story in the sidebar to view detailed requirements, acceptance criteria, and user flows.</p>
+                    
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <h3>🛠️ Admin Stories</h3>
+                            <p>Platform management, content moderation, user administration, and system monitoring capabilities for the 3-person admin team.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🎥 Creator Stories</h3>
+                            <p>Content creation workflow, challenge participation, analytics dashboard, and prize winner journey for video creators.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>👤 Logged-in Users</h3>
+                            <p>Enhanced voting power, creator following, personalized feeds, and engagement features for registered users.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🌐 Anonymous Viewers</h3>
+                            <p>Limited access experience, conversion funnels, and viral distribution mechanisms for non-registered users.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>📋 Platform Overview</h3>
+                            <p>Cross-cutting concerns, technical specifications, error handling, and overall system architecture guidelines.</p>
+                        </div>
+                        <div class="feature-card">
+                            <h3>🎯 Implementation Ready</h3>
+                            <p>All stories include technical requirements, acceptance criteria, user flows, and development-ready specifications.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="info-message">
+                        <h3>📚 Documentation Features:</h3>
+                        <p><strong>Comprehensive Coverage:</strong> All user types, workflows, and edge cases documented</p>
+                        <p><strong>Mermaid Diagrams:</strong> Visual user flows and system interactions</p>
+                        <p><strong>Technical Specs:</strong> Implementation-ready requirements and constraints</p>
+                        <p><strong>Cross-References:</strong> Clear connections between different user types and workflows</p>
+                        <p><strong>Indian Compliance:</strong> OTP authentication, KYC verification, and regulatory adherence</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme management
+        const themeToggle = document.getElementById('theme-toggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // Initialize theme
+        function initializeTheme() {
+            const savedTheme = localStorage.getItem('dvand-theme');
+            const systemPreference = prefersDarkScheme.matches ? 'dark' : 'light';
+            const theme = savedTheme || systemPreference;
+            
+            setTheme(theme);
+        }
+        
+        function setTheme(theme) {
+            document.body.setAttribute('data-theme', theme);
+            themeToggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+            themeToggle.title = theme === 'dark' ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+            localStorage.setItem('dvand-theme', theme);
+            
+            // Reinitialize Mermaid with new theme
+            if (typeof mermaid !== 'undefined') {
+                mermaid.initialize({
+                    startOnLoad: false,
+                    theme: theme === 'dark' ? 'dark' : 'default',
+                    flowchart: {
+                        useMaxWidth: true,
+                        htmlLabels: true,
+                        curve: 'basis'
+                    },
+                    themeVariables: {
+                        primaryColor: theme === 'dark' ? '#8b5cf6' : '#667eea',
+                        primaryTextColor: theme === 'dark' ? '#f1f5f9' : '#1e293b',
+                        primaryBorderColor: theme === 'dark' ? '#8b5cf6' : '#667eea',
+                        lineColor: theme === 'dark' ? '#8b5cf6' : '#667eea',
+                        sectionBkgColor: theme === 'dark' ? '#1e293b' : '#f8fafc',
+                        altSectionBkgColor: theme === 'dark' ? '#334155' : '#f1f5f9',
+                        gridColor: theme === 'dark' ? '#475569' : '#e2e8f0',
+                        tertiaryColor: theme === 'dark' ? '#334155' : '#f1f5f9'
+                    }
+                });
+            }
+        }
+        
+        function toggleTheme() {
+            const currentTheme = document.body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+            
+            // If a diagram is currently shown, re-render it with the new theme
+            const currentMermaid = document.querySelector('.mermaid');
+            if (currentMermaid && currentMermaid.id) {
+                const originalContent = currentMermaid.getAttribute('data-original-content') || currentMermaid.textContent;
+                currentMermaid.setAttribute('data-original-content', originalContent);
+                currentMermaid.innerHTML = originalContent;
+                currentMermaid.removeAttribute('data-processed');
+                if (typeof mermaid !== 'undefined') {
+                    mermaid.run({ querySelector: `#${currentMermaid.id}` });
+                }
+            }
+        }
+        
+        // Initialize theme on load
+        initializeTheme();
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        prefersDarkScheme.addEventListener('change', (e) => {
+            if (!localStorage.getItem('dvand-theme')) {
+                setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+
+        // Initialize Mermaid
+        if (typeof mermaid !== 'undefined') {
+            mermaid.initialize({
+                startOnLoad: false,
+                theme: document.body.getAttribute('data-theme') === 'dark' ? 'dark' : 'default',
+                flowchart: {
+                    useMaxWidth: true,
+                    htmlLabels: true,
+                    curve: 'basis'
+                }
+            });
+        }
+
+        // Story selection functionality
+        document.querySelectorAll('.story-item').forEach(item => {
+            item.addEventListener('click', async () => {
+                // Remove active class from all items
+                document.querySelectorAll('.story-item').forEach(i => {
+                    i.classList.remove('active', 'loading');
+                });
+                
+                // Add loading class to clicked item
+                item.classList.add('loading');
+                
+                // Get file info
+                const fileName = item.dataset.file;
+                const storyName = item.querySelector('.story-name').textContent;
+                
+                // Update header
+                document.getElementById('content-title').textContent = storyName;
+                document.getElementById('content-path').textContent = `stories/${fileName}`;
+                
+                // Load and render story
+                await loadAndRenderStory(fileName, storyName);
+                
+                // Remove loading and add active class
+                item.classList.remove('loading');
+                item.classList.add('active');
+            });
+        });
+
+        async function loadAndRenderStory(fileName, storyName) {
+            const container = document.getElementById('content-container');
+            
+            // Show loading message
+            container.innerHTML = `
+                <div class="content-wrapper">
+                    <div class="loading-message fade-in">
+                        <div class="loading-spinner"></div>
+                        <h3>Loading ${storyName}...</h3>
+                        <p>Fetching and rendering user story documentation...</p>
+                    </div>
+                </div>
+            `;
+            
+            try {
+                // Try to fetch the .md file
+                const response = await fetch(fileName);
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                
+                const fileContent = await response.text();
+                
+                // Parse markdown content
+                const htmlContent = await parseMarkdownContent(fileContent);
+                
+                container.innerHTML = `
+                    <div class="content-wrapper">
+                        <div class="markdown-content fade-in">
+                            ${htmlContent}
+                        </div>
+                    </div>
+                `;
+                
+                // Render any mermaid diagrams
+                const mermaidElements = container.querySelectorAll('.mermaid');
+                if (mermaidElements.length > 0 && typeof mermaid !== 'undefined') {
+                    mermaidElements.forEach((element, index) => {
+                        element.id = `mermaid-${Date.now()}-${index}`;
+                    });
+                    await mermaid.run();
+                }
+                
+            } catch (error) {
+                console.error('Error loading story:', error);
+                
+                let errorMessage = 'Unknown error occurred';
+                let suggestion = '';
+                
+                if (error.message.includes('HTTP 404') || error.message.includes('Not Found')) {
+                    errorMessage = 'User story file not found';
+                    suggestion = 'Make sure the .md file is in the same directory as this HTML file.';
+                } else if (error.message.includes('Failed to fetch') || error.message.includes('CORS')) {
+                    errorMessage = 'Cannot access local files directly';
+                    suggestion = 'This page needs to be served from a web server. For local development, use a local server (e.g., <code>python -m http.server 8000</code>) or VS Code Live Server extension.';
+                } else {
+                    errorMessage = error.message;
+                    suggestion = 'Please check the console for more details and ensure the file exists.';
+                }
+                
+                container.innerHTML = `
+                    <div class="content-wrapper">
+                        <div class="error-message fade-in">
+                            <h3>❌ Error loading ${storyName}</h3>
+                            <p><strong>Error:</strong> ${errorMessage}</p>
+                            <p><strong>Suggestion:</strong> ${suggestion}</p>
+                            <p><strong>File Path:</strong> <code>${fileName}</code></p>
+                            <details style="margin-top: 1rem;">
+                                <summary style="cursor: pointer; font-weight: 600;">Technical Details</summary>
+                                <pre style="margin-top: 0.5rem; font-size: 0.8rem; background: var(--bg-secondary); padding: 1rem; border-radius: 8px;">${error.message}\n\nStack: ${error.stack || 'Not available'}</pre>
+                            </details>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        async function parseMarkdownContent(content) {
+            if (typeof marked === 'undefined') {
+                // Fallback to basic parsing if marked.js is not available
+                return basicMarkdownParse(content);
+            }
+            
+            // Configure marked
+            marked.setOptions({
+                highlight: function(code, lang) {
+                    return code; // Basic highlighting - you can enhance this
+                },
+                breaks: true,
+                gfm: true
+            });
+            
+            // Custom renderer for mermaid blocks
+            const renderer = new marked.Renderer();
+            const originalCode = renderer.code;
+            
+            renderer.code = function(code, language) {
+                if (language === 'mermaid') {
+                    return `<div class="mermaid">${code}</div>`;
+                }
+                return originalCode.call(this, code, language);
+            };
+            
+            marked.use({ renderer });
+            
+            return marked.parse(content);
+        }
+
+        function basicMarkdownParse(content) {
+            // Basic markdown parsing for fallback
+            let html = content;
+            
+            // Headers
+            html = html.replace(/^### (.*$)/gim, '<h3>$1</h3>');
+            html = html.replace(/^## (.*$)/gim, '<h2>$1</h2>');
+            html = html.replace(/^# (.*$)/gim, '<h1>$1</h1>');
+            
+            // Bold
+            html = html.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            
+            // Italic
+            html = html.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            
+            // Code blocks
+            html = html.replace(/```mermaid\n([\s\S]*?)\n```/g, '<div class="mermaid">$1</div>');
+            html = html.replace(/```([\s\S]*?)```/g, '<pre><code>$1</code></pre>');
+            
+            // Inline code
+            html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+            
+            // Line breaks
+            html = html.replace(/\n\n/g, '</p><p>');
+            html = html.replace(/\n/g, '<br>');
+            
+            // Wrap in paragraphs
+            html = '<p>' + html + '</p>';
+            
+            // Clean up empty paragraphs
+            html = html.replace(/<p><\/p>/g, '');
+            html = html.replace(/<p><h/g, '<h');
+            html = html.replace(/<\/h([1-6])><\/p>/g, '</h$1>');
+            
+            return html;
+        }
+
+        // Smooth scrolling for anchor links
+        document.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A' && e.target.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                const target = document.querySelector(e.target.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
+        // Add keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case 'd':
+                        e.preventDefault();
+                        toggleTheme();
+                        break;
+                }
+            }
+        });
+
+        // Add error boundary for JavaScript errors
+        window.addEventListener('error', function(e) {
+            console.error('JavaScript error:', e.error);
+            const container = document.getElementById('content-container');
+            if (container && !container.querySelector('.error-message')) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'error-message fade-in';
+                errorDiv.innerHTML = `
+                    <h3>⚠️ JavaScript Error Occurred</h3>
+                    <p><strong>Error:</strong> ${e.message}</p>
+                    <p><strong>Location:</strong> ${e.filename}:${e.lineno}</p>
+                    <p>Please refresh the page or check the browser console for more details.</p>
+                `;
+                container.querySelector('.content-wrapper')?.appendChild(errorDiv);
+            }
+        });
+    </script>
+</body>
+</html>

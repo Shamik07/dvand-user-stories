@@ -451,53 +451,53 @@
 
 ```mermaid
 graph TD
-    A[Creator submits 15-60 second video] --> B[Submission enters prioritized moderation queue]
-    B --> C[Admin reviews video + metadata + creator history]
+    A["Creator submits 15-60 second video"] --> B["Submission enters prioritized moderation queue"]
+    B --> C["Admin reviews video + metadata + creator history"]
     C --> D{Content meets guidelines?}
-    D -->|Yes| E[One-click approval]
-    D -->|No| F[Rejection with detailed feedback]
-    E --> G[Video goes live + creator notification]
-    G --> H[Challenge leaderboard updated]
-    H --> I[Viewers can vote with enhanced power]
-    F --> J[Educational resources sent to Creator]
+    D -->|Yes| E["One-click approval"]
+    D -->|No| F["Rejection with detailed feedback"]
+    E --> G["Video goes live + creator notification"]
+    G --> H["Challenge leaderboard updated"]
+    H --> I["Viewers can vote with enhanced power"]
+    F --> J["Educational resources sent to Creator"]
     J --> K{Creator appeals?}
-    K -->|Yes| L[Appeal review within 24 hours]
-    K -->|No| M[Creator learns + creates new content]
-    L --> N[Appeal decision + communication]
+    K -->|Yes| L["Appeal review within 24 hours"]
+    K -->|No| M["Creator learns + creates new content"]
+    L --> N["Appeal decision + communication"]
 ```
 
 ### Flow 2: Challenge Lifecycle Management
 
 ```mermaid
 graph TD
-    A[Admin creates challenge: weekly ₹5K or monthly ₹25K] --> B[Challenge details + rules configured]
-    B --> C[Challenge goes live + Creator notifications sent]
-    C --> D[Creators submit 2 videos max per challenge]
-    D --> E[Admin monitors: participation + engagement + quality]
-    E --> F[Real-time leaderboard updates from Viewer voting]
+    A["Admin creates challenge: weekly ₹5K or monthly ₹25K"] --> B["Challenge details + rules configured"]
+    B --> C["Challenge goes live + Creator notifications sent"]
+    C --> D["Creators submit 2 videos max per challenge"]
+    D --> E["Admin monitors: participation + engagement + quality"]
+    E --> F["Real-time leaderboard updates from Viewer voting"]
     F --> G{Challenge deadline reached?}
-    G -->|No| H[Continued monitoring + content moderation]
-    G -->|Yes| I[Final leaderboard review + winner determination]
+    G -->|No| H["Continued monitoring + content moderation"]
+    G -->|Yes| I["Final leaderboard review + winner determination"]
     H --> D
-    I --> J[Single winner selected (winner-takes-all)]
-    J --> K[Winner announcement + prize verification initiated]
+    I --> J["Single winner selected - winner takes all"]
+    J --> K["Winner announcement + prize verification initiated"]
 ```
 
 ### Flow 3: KYC Verification and Prize Payment
 
 ```mermaid
 graph TD
-    A[Creator wins challenge] --> B[Automatic full KYC verification triggered]
-    B --> C[Additional documents requested: PAN + bank details]
-    C --> D[Admin reviews documents in priority queue]
+    A["Creator wins challenge"] --> B["Automatic full KYC verification triggered"]
+    B --> C["Additional documents requested: PAN + bank details"]
+    C --> D["Admin reviews documents in priority queue"]
     D --> E{Verification approved?}
-    E -->|Yes| F[Prize payment processing initiated]
-    E -->|No| G[Detailed feedback + resubmission guidance]
-    F --> H[Business payment service: Razorpay/Cashfree]
-    H --> I[Automatic TDS calculation + tax documentation]
-    I --> J[Bank transfer processed + confirmation]
-    J --> K[Payment receipt + winner celebration]
-    G --> L[Document correction + expedited review]
+    E -->|Yes| F["Prize payment processing initiated"]
+    E -->|No| G["Detailed feedback + resubmission guidance"]
+    F --> H["Business payment service: Razorpay/Cashfree"]
+    H --> I["Automatic TDS calculation + tax documentation"]
+    I --> J["Bank transfer processed + confirmation"]
+    J --> K["Payment receipt + winner celebration"]
+    G --> L["Document correction + expedited review"]
     L --> D
 ```
 
@@ -505,50 +505,50 @@ graph TD
 
 ```mermaid
 graph TD
-    A[User reports inappropriate content] --> B[Report enters admin safety queue]
-    B --> C[Admin investigates: content + context + user history]
+    A["User reports inappropriate content"] --> B["Report enters admin safety queue"]
+    B --> C["Admin investigates: content + context + user history"]
     C --> D{Safety violation confirmed?}
-    D -->|Yes| E[Content removal + creator notification]
-    D -->|No| F[Report dismissed + reporter notification]
-    E --> G[Creator account review + violation recording]
+    D -->|Yes| E["Content removal + creator notification"]
+    D -->|No| F["Report dismissed + reporter notification"]
+    E --> G["Creator account review + violation recording"]
     G --> H{Creator appeals decision?}
-    H -->|Yes| I[Appeal review with policy consultation]
-    H -->|No| J[Violation stands + educational resources provided]
-    I --> K[Appeal decision + detailed explanation]
-    K --> L[Policy clarification if needed]
+    H -->|Yes| I["Appeal review with policy consultation"]
+    H -->|No| J["Violation stands + educational resources provided"]
+    I --> K["Appeal decision + detailed explanation"]
+    K --> L["Policy clarification if needed"]
 ```
 
 ### Flow 5: Platform Monitoring and Analytics
 
 ```mermaid
 graph TD
-    A[Continuous platform monitoring] --> B[System health + user engagement + content quality]
-    B --> C[Real-time dashboard + automated alerts]
+    A["Continuous platform monitoring"] --> B["System health + user engagement + content quality"]
+    B --> C["Real-time dashboard + automated alerts"]
     C --> D{Issues detected?}
-    D -->|Yes| E[Immediate investigation + resolution]
-    D -->|No| F[Routine analytics + reporting]
-    E --> G[Issue resolution + user communication]
-    G --> H[Post-resolution monitoring]
-    F --> I[Daily/weekly/monthly reports generated]
-    I --> J[Strategic insights + improvement recommendations]
-    J --> K[Platform optimization + policy updates]
+    D -->|Yes| E["Immediate investigation + resolution"]
+    D -->|No| F["Routine analytics + reporting"]
+    E --> G["Issue resolution + user communication"]
+    G --> H["Post-resolution monitoring"]
+    F --> I["Daily/weekly/monthly reports generated"]
+    I --> J["Strategic insights + improvement recommendations"]
+    J --> K["Platform optimization + policy updates"]
 ```
 
 ### Flow 6: Error Recovery and System Resilience
 
 ```mermaid
 graph TD
-    A[System error detected] --> B{Error category + severity}
-    B -->|Critical| C[Immediate escalation + emergency protocols]
-    B -->|Moderate| D[Automated recovery + user notification]
-    B -->|Minor| E[Background resolution + logging]
-    C --> F[Manual intervention + system restoration]
-    F --> G[User communication + service recovery]
-    D --> H[Recovery verification + monitoring]
-    E --> I[Trend analysis + prevention measures]
-    G --> J[Post-incident review + improvement]
-    H --> K[Normal operations restored]
-    I --> L[Proactive system strengthening]
+    A["System error detected"] --> B{Error category + severity}
+    B -->|Critical| C["Immediate escalation + emergency protocols"]
+    B -->|Moderate| D["Automated recovery + user notification"]
+    B -->|Minor| E["Background resolution + logging"]
+    C --> F["Manual intervention + system restoration"]
+    F --> G["User communication + service recovery"]
+    D --> H["Recovery verification + monitoring"]
+    E --> I["Trend analysis + prevention measures"]
+    G --> J["Post-incident review + improvement"]
+    H --> K["Normal operations restored"]
+    I --> L["Proactive system strengthening"]
 ```
 
 ---
